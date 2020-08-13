@@ -1425,16 +1425,21 @@ class Bars {
         if (eyeBox.duration > 0) {
           let old = parseFloat(eyeBox.duration) - parseFloat(eyeBox.elapsed);
           eyeBox.duration = 0;
-          eyeBox.duration = Math.min(old + 10, 30);
+          eyeBox.duration = Math.min(old + 30, 60);
         }
         return;
       }
       if (skill == kAbility.StormsEye) {
+        if (eyeBox.duration > 0) {
+          let old = parseFloat(eyeBox.duration) - parseFloat(eyeBox.elapsed);
         eyeBox.duration = 0;
+        eyeBox.duration = Math.min(old + 30, 60);
         // Storm's Eye applies with some animation delay here, and on the next
         // Storm's Eye, it snapshots the damage when the gcd is started, so
         // add some of a gcd here in duration time from when it's applied.
-        eyeBox.duration = 30 + 1;
+        } else {
+          eyeBox.duration = 0;
+          eyeBox.duration = 30 + 1;
       }
 
       // Min number of skills until eye without breaking combo.
